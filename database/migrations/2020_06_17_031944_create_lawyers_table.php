@@ -22,7 +22,12 @@ class CreateLawyersTable extends Migration
             $table->string('phone', 100)->nullable();;
             $table->string('document', 100);
             $table->string('oab', 100);
+            $table->string('photo');
+            $table->string('password');
             $table->dateTime('date_of_birth');
+            $table->timestamp('email_verified_at')->nullable();
+
+            $table->index(['name', 'company', 'oab']);
 
             $table->timestamps();
             $table->softDeletes();

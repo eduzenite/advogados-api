@@ -15,30 +15,43 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('adresses', 'AddressController@index');
-$router->get('address/{id}', 'AddressController@show');
-$router->post('address/{id}', 'AddressController@store');
-$router->put('address/{id}', 'AddressController@update');
-$router->patch('address/{id}', 'AddressController@update');
-$router->delete('address/{id}', 'AddressController@delete');
+$router->group(['prefix' => 'v1'], function () use ($router) {
+    $router->group(['prefix' => 'addresses'], function () use ($router) {
+        $router->get('/', 'AddressController@index');
+        $router->get('{id}', 'AddressController@show');
+        $router->post('', 'AddressController@store');
+        $router->put('{id}', 'AddressController@update');
+        $router->delete('{id}', 'AddressController@destroy');
+    });
 
-$router->get('areas', 'AreaController@index');
-$router->get('area/{id}', 'AreaController@show');
+    $router->group(['prefix' => 'areas'], function () use ($router) {
+        $router->get('', 'AreaController@index');
+        $router->get('{id}', 'AreaController@show');
+    });
 
-$router->get('cities', 'CityController@index');
-$router->get('city/{id}', 'CityController@show');
+    $router->group(['prefix' => 'cities'], function () use ($router) {
+        $router->get('', 'CityController@index');
+        $router->get('{id}', 'CityController@show');
+    });
 
-$router->get('lawyers', 'LawyerController@index');
-$router->get('lawyer/{id}', 'LawyerController@show');
-$router->post('lawyer/{id}', 'LawyerController@store');
-$router->put('lawyer/{id}', 'LawyerController@update');
-$router->patch('lawyer/{id}', 'LawyerController@update');
-$router->delete('lawyer/{id}', 'LawyerController@delete');
+    //Finished
+    $router->group(['prefix' => 'lawyers'], function () use ($router) {
+        $router->get('/', 'LawyerController@index');
+        $router->get('{id}', 'LawyerController@show');
+        $router->post('', 'LawyerController@store');
+        $router->put('{id}', 'LawyerController@update');
+        $router->delete('{id}', 'LawyerController@destroy');
+    });
 
-$router->get('lawyer-areas/{id}', 'LawyerAreaController@show');
-$router->post('lawyer-area/{id}', 'LawyerAreaController@store');
-$router->delete('lawyer-area/{id}', 'LawyerAreaController@delete');
+    $router->group(['prefix' => 'lawyer-areas'], function () use ($router) {
+        $router->get('{id}', 'LawyerAreaController@show');
+        $router->post('', 'LawyerAreaController@store');
+        $router->delete('{id}', 'LawyerAreaController@destroy');
+    });
 
-$router->get('operation-cities/{id}', 'OperationCityController@show');
-$router->post('operation-city/{id}', 'OperationCityController@store');
-$router->delete('operation-city/{id}', 'OperationCityController@delete');
+    $router->group(['prefix' => 'operation-cities'], function () use ($router) {
+        $router->get('{id}', 'OperationCityController@show');
+        $router->post('', 'OperationCityController@store');
+        $router->delete('{id}', 'OperationCityController@destroy');
+    });
+});

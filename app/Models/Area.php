@@ -12,6 +12,17 @@ class Area extends Model
         'name',
     ];
 
+    public static $rules = [
+        'name' => 'required',
+    ];
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'O parâmetro "name" é obrigatório',
+        ];
+    }
+
     public function lawyer_areas()
     {
         $this->hasMany(LawyerArea::class);

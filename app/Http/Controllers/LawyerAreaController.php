@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Models\Lawyer;
 use Illuminate\Http\Request;
 
-class ExampleController extends Controller
+class LawyerAreaController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,7 +22,7 @@ class ExampleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
     }
@@ -33,7 +35,6 @@ class ExampleController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**

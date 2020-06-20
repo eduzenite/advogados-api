@@ -15,6 +15,21 @@ class City extends Model
         'country',
     ];
 
+    public static $rules = [
+        'city' => 'required',
+        'state' => 'required',
+        'country' => 'required',
+    ];
+
+    public function messages()
+    {
+        return [
+            'city.required' => 'O parâmetro "city" é obrigatório',
+            'state.required' => 'O parâmetro "state" é obrigatório',
+            'country.required' => 'O parâmetro "country" é obrigatório',
+        ];
+    }
+
     public function operation_cities()
     {
         $this->hasMany(OperationCity::class);

@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use Illuminate\Http\Request;
 
-class ExampleController extends Controller
+class AreaController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -18,11 +19,12 @@ class ExampleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-
+        $areas = Area::all();
+        return response()->json($areas);
     }
 
     /**
